@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "BKey.Util.VsClean": {
+      "commandName": "Project",
+      "commandLineArgs": "C:\\Users\\bkey\\source\\repos\\BKey.Utils.Encode\\BKey.Util.Encode"
+    }
+  }
+}

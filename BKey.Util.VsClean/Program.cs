@@ -17,9 +17,10 @@ internal class Program
             {
                 new Option<string[]>(
                     new string[] { "--remove", "-r" },
+                    () => ["bin-obj"],
                     "List of folder types to remove: bin-obj, vs, packages")
                 {
-                    IsRequired = true,
+                    Arity = ArgumentArity.OneOrMore
                 }
                 .FromAmong(DiscoveryServiceFactory.ListServices().ToArray()),
                 new Option<string>(
@@ -63,7 +64,20 @@ internal class Program
                 }
             }
 
+            if (!allPathsToRemove.Any())
+            {
+                Console.WriteLine("Nothing found");
+                return;
+            }
+
             var filteredPaths = pathFilter.FilterPaths(allPathsToRemove);
+
+            if (!filteredPaths.Any())
+            {
+                Console.WriteLine("Nothing to delete");
+                return;
+            }
+
             deleteService.RemovePaths(filteredPaths);
         });
 
